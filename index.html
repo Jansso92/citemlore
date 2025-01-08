@@ -3,174 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minecraft Text Tool</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <title>Minecraft Tooltip Editor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #2c2f33;
-            color: white;
-            padding: 20px;
+        /* Minecraft-Tooltip-Stil */
+        #preview {
+            background: #202020; /* Hintergrund */
+            color: #AA00FF; /* Lila Textfarbe */
+            font-family: "Press Start 2P", monospace; /* Minecraft-ähnliche Schrift */
+            border: 1px solid #505050; /* Rand */
+            padding: 10px;
+            border-radius: 5px; /* Abgerundete Ecken */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Schatten */
+            max-width: 300px; /* Maximale Breite */
+            line-height: 1.5; /* Zeilenhöhe */
+            margin-bottom: 20px;
         }
 
-        h1 {
-            text-align: center;
+        /* Textfelder */
+        textarea, input[type="text"] {
+            width: 100%;
+            font-family: "Press Start 2P", monospace;
+            margin-bottom: 10px;
         }
 
         textarea {
-            width: 100%;
-            resize: vertical;
-            margin-bottom: 10px;
-            background-color: #23272a;
-            color: white;
-            border: 1px solid #7289da;
-            padding: 10px;
+            resize: both; /* Manuelles Vergrößern/Verkleinern */
+            height: 100px; /* Standardhöhe */
         }
 
-        input[type="text"], input[type="file"] {
-            width: 100%;
-            margin-bottom: 10px;
-            padding: 10px;
-            background-color: #23272a;
-            color: white;
-            border: 1px solid #7289da;
-        }
-
-        .preview {
-            background-color: #23272a;
-            border: 1px solid #7289da;
-            padding: 10px;
-            margin-bottom: 20px;
-            font-family: monospace;
-            overflow: auto;
-        }
-
-        .button {
-            margin: 5px;
-            padding: 10px 15px;
-            background-color: #7289da;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        .button:hover {
-            background-color: #5b6e9c;
-        }
-
-        .color-button {
-            margin: 3px;
-            padding: 5px 10px;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            border-radius: 5px;
-        }
-
-        .color-button:hover {
-            opacity: 0.8;
-        }
-
-        .rgb-preview {
+        /* Farbcodes und Effekte */
+        .color-code, .effect-code, .symbol {
             display: inline-block;
-            padding: 5px;
-            font-family: monospace;
+            margin: 5px;
+            padding: 5px 10px;
+            background: #333;
+            color: white;
+            font-family: "Press Start 2P", monospace;
+            cursor: pointer;
+            border-radius: 3px;
         }
 
-        #gradient-container {
-            margin-top: 20px;
-            padding: 10px;
-            border: 1px solid #7289da;
-            background-color: #23272a;
+        .color-code, .symbol {
+            border: 2px solid white;
+        }
+
+        .effect-code:hover, .color-code:hover, .symbol:hover {
+            background: #444;
         }
     </style>
 </head>
 <body>
-    <h1>Minecraft Text Tool</h1>
-
-    <!-- Vorschau -->
     <div>
         <h2>Vorschau</h2>
-        <div class="preview" id="preview">
-            Vorschau des Minecraft-Textes
+        <div id="preview">
+            <strong>Itemname</strong><br>
+            <span style="color: #AAAAAA;">Lore Zeile 1</span><br>
+            <span style="color: #AAAAAA;">Lore Zeile 2</span>
         </div>
     </div>
 
-    <!-- Eingabefelder -->
     <div>
-        <label for="itemname">Itemname:</label>
-        <input type="text" id="itemname" oninput="updatePreview()">
+        <label for="itemname">Itemname</label>
+        <input type="text" id="itemname" placeholder="Itemname einfügen" oninput="updatePreview()" onclick="setActiveField('itemname')">
 
-        <label for="lore">Lore:</label>
-        <textarea id="lore" rows="5" oninput="updatePreview()"></textarea>
+        <label for="lore">Lore</label>
+        <textarea id="lore" placeholder="Lore einfügen" oninput="updatePreview()" onclick="setActiveField('lore')"></textarea>
     </div>
 
-    <!-- Minecraft Farbcodes -->
     <div>
-        <h2>Farbcodes</h2>
-        <div id="color-codes">
-            <button class="color-button" style="background-color: #000; color: #fff;" onclick="insertText('&0')">&0</button>
-            <button class="color-button" style="background-color: #00a; color: #fff;" onclick="insertText('&1')">&1</button>
-            <button class="color-button" style="background-color: #0a0; color: #fff;" onclick="insertText('&2')">&2</button>
-            <button class="color-button" style="background-color: #0aa; color: #fff;" onclick="insertText('&3')">&3</button>
-            <button class="color-button" style="background-color: #a00; color: #fff;" onclick="insertText('&4')">&4</button>
-            <button class="color-button" style="background-color: #a0a; color: #fff;" onclick="insertText('&5')">&5</button>
-            <button class="color-button" style="background-color: #fa0; color: #000;" onclick="insertText('&6')">&6</button>
-            <button class="color-button" style="background-color: #aaa; color: #000;" onclick="insertText('&7')">&7</button>
-            <button class="color-button" style="background-color: #555; color: #fff;" onclick="insertText('&8')">&8</button>
-            <button class="color-button" style="background-color: #55f; color: #fff;" onclick="insertText('&9')">&9</button>
-            <button class="color-button" style="background-color: #5f5; color: #000;" onclick="insertText('&a')">&a</button>
-            <button class="color-button" style="background-color: #5ff; color: #000;" onclick="insertText('&b')">&b</button>
-            <button class="color-button" style="background-color: #f55; color: #000;" onclick="insertText('&c')">&c</button>
-            <button class="color-button" style="background-color: #f5f; color: #000;" onclick="insertText('&d')">&d</button>
-            <button class="color-button" style="background-color: #ff5; color: #000;" onclick="insertText('&e')">&e</button>
-            <button class="color-button" style="background-color: #fff; color: #000;" onclick="insertText('&f')">&f</button>
+        <h3>Farbcodes</h3>
+        <div id="colors">
+            <span class="color-code" onclick="insertText('&0')">&0 Schwarz</span>
+            <span class="color-code" onclick="insertText('&1')">&1 Dunkelblau</span>
+            <span class="color-code" onclick="insertText('&2')">&2 Dunkelgrün</span>
+            <span class="color-code" onclick="insertText('&3')">&3 Dunkelaqua</span>
+            <span class="color-code" onclick="insertText('&4')">&4 Dunkelrot</span>
+            <span class="color-code" onclick="insertText('&5')">&5 Lila</span>
+            <span class="color-code" onclick="insertText('&6')">&6 Gold</span>
+            <span class="color-code" onclick="insertText('&7')">&7 Grau</span>
+            <span class="color-code" onclick="insertText('&8')">&8 Dunkelgrau</span>
+            <span class="color-code" onclick="insertText('&9')">&9 Blau</span>
+            <span class="color-code" onclick="insertText('&a')">&a Grün</span>
+            <span class="color-code" onclick="insertText('&b')">&b Aqua</span>
+            <span class="color-code" onclick="insertText('&c')">&c Rot</span>
+            <span class="color-code" onclick="insertText('&d')">&d Rosa</span>
+            <span class="color-code" onclick="insertText('&e')">&e Gelb</span>
+            <span class="color-code" onclick="insertText('&f')">&f Weiß</span>
+        </div>
+
+        <h3>Text-Effekte</h3>
+        <div id="effects">
+            <span class="effect-code" onclick="insertText('&l')">&l Fett</span>
+            <span class="effect-code" onclick="insertText('&o')">&o Kursiv</span>
+            <span class="effect-code" onclick="insertText('&n')">&n Unterstrichen</span>
+            <span class="effect-code" onclick="insertText('&m')">&m Durchgestrichen</span>
+            <span class="effect-code" onclick="insertText('&r')">&r Reset</span>
+        </div>
+
+        <h3>Chatsymbole</h3>
+        <div id="symbols">
+            <span class="symbol" onclick="insertText('❤')">❤ Herz</span>
+            <span class="symbol" onclick="insertText('★')">★ Stern</span>
+            <span class="symbol" onclick="insertText('✦')">✦ Funkel</span>
+            <span class="symbol" onclick="insertText('✔')">✔ Haken</span>
+            <span class="symbol" onclick="insertText('✖')">✖ Kreuz</span>
+            <span class="symbol" onclick="insertText('→')">→ Pfeil</span>
+            <span class="symbol" onclick="insertText('←')">← Pfeil</span>
+            <span class="symbol" onclick="insertText('↑')">↑ Pfeil</span>
+            <span class="symbol" onclick="insertText('↓')">↓ Pfeil</span>
+            <span class="symbol" onclick="insertText('•')">• Punkt</span>
         </div>
     </div>
 
-    <!-- Formatierungen -->
-    <div>
-        <h2>Formatierungen</h2>
-        <button class="button" onclick="insertText('&l')">Fett (&l)</button>
-        <button class="button" onclick="insertText('&m')">Durchgestrichen (&m)</button>
-        <button class="button" onclick="insertText('&n')">Unterstrichen (&n)</button>
-        <button class="button" onclick="insertText('&o')">Kursiv (&o)</button>
-        <button class="button" onclick="insertText('&r')">Zurücksetzen (&r)</button>
-    </div>
-
-    <!-- Chatsymbole -->
-   <div id="symbol-browser">
-    <h2>Symbol-Browser</h2>
-    <div id="symbolList"></div>
-</div>
-
-    <!-- RGB Generator -->
-<div id="rgb-generator">
-    <h2>RGB Farbtext Generator</h2>
-
-    <!-- Text zum Formatieren -->
-    <label for="rgb-text">Text:</label>
-    <input type="text" id="rgb-text" placeholder="Gib hier deinen Text ein...">
-
-    <!-- Farbschema -->
-    <div id="color-container">
-        <label for="color1">Farbe 1:</label>
-        <input type="color" id="color1" value="#ff0000">
-    </div>
-    <button id="add-color" class="button">Farbe hinzufügen</button>
-
-    <!-- Vorschau -->
-    <h3>Vorschau</h3>
-    <div id="rgb-preview" class="preview"></div>
-
-    <!-- Export/Import Buttons -->
-    <button id="export-scheme" class="button">Exportieren</button>
-    <input type="file" id="import-file" class="button" accept=".json">
-</div>
     <script>
-        // Hier kommt der JavaScript Code hin.
+        let activeField = "lore"; // Standardmäßig das Lore-Feld
+
+        // Setzt das aktive Feld beim Klick
+        function setActiveField(fieldId) {
+            activeField = fieldId;
+        }
+
+        // Minecraft-Tooltip aktualisieren
+        function updatePreview() {
+            const itemname = document.getElementById("itemname").value;
+            const lore = document.getElementById("lore").value;
+
+            // Minecraft-Formatierungen anwenden
+            const formattedName = formatMinecraftText(itemname);
+            const formattedLore = formatMinecraftText(lore);
+
+            document.getElementById("preview").innerHTML = `<strong>${formattedName}</strong><br>${formattedLore}`;
+        }
+
+        // Minecraft-Farb- und Textcodes formatieren
+        function formatMinecraftText(text) {
+            return text
+                .replace(/&([0-9a-f])/g, `<span style="color: #$1;">`) // Farben
+                .replace(/&l/g, `<span style="font-weight: bold;">`) // Fett
+                .replace(/&o/g, `<span style="font-style: italic;">`) // Kursiv
+                .replace(/&n/g, `<span style="text-decoration: underline;">`) // Unterstrichen
+                .replace(/&m/g, `<span style="text-decoration: line-through;">`) // Durchgestrichen
+                .replace(/&r/g, `</span>`); // Zurücksetzen
+        }
+
+        // Text in das aktive Feld einfügen
+        function insertText(text) {
+            const field = document.getElementById(activeField);
+            const cursorPos = field.selectionStart;
+            const textBefore = field.value.substring(0, cursorPos);
+            const textAfter = field.value.substring(cursorPos);
+
+            field.value = textBefore + text + textAfter;
+            field.focus();
+            updatePreview();
+        }
     </script>
 </body>
 </html>
