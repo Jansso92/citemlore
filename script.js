@@ -1,6 +1,7 @@
-let currentColorCodeType = "&"; // Default: '&'
+let currentColorCodeType = "&"; // Standard: '&'
+let lastGeneratedGradient = "";
 
-// Update Vorschau
+// Vorschau aktualisieren
 function updateTooltip() {
     const itemName = document.getElementById("itemname").value;
     const itemLore = document.getElementById("itemlore").value;
@@ -44,4 +45,58 @@ function insertText(text) {
 function switchColorCodeType() {
     currentColorCodeType = currentColorCodeType === "&" ? "§" : "&";
     document.getElementById("color-switch").innerHTML = `Wechsel zu: ${currentColorCodeType === "&" ? "§" : "&"}`;
+}
+
+// RGB Farbverlauf generieren
+function generateGradient() {
+    const text = document.getElementById("gradient-text").value;
+    const startColor = document.getElementById("start-color").value;
+    const endColor = document.getElementById("end-color").value;
+
+    lastGeneratedGradient = calculateGradient(text, startColor, endColor);
+    alert("Gradient generiert! Vorschau in Kürze.");
+}
+
+function calculateGradient(text, startColor, endColor) {
+    const steps = text.length;
+    const gradient = [];
+    for (let i = 0; i < steps; i++) {
+        const ratio = i / (steps - 1);
+        const color = interpolateColor(startColor, endColor, ratio);
+        gradient.push(`${currentColorCodeType}#${color}`);
+    }
+    return gradient.join("");
+}
+
+function interpolateColor(start, end, ratio) {
+    const hexToRgb = (hex) => hex.match(/.{1,2}/g).map((x) => parseInt(x, 16));
+    const rgbToHex = (rgb) => rgb.map((x) => x.toString(16).padStart(2, "0")).join("");
+    const startRgb = hexToRgb(start.slice(1));
+    const endRgb = hexToRgb(end.slice(1));
+    const interpolated = startRgb.map((start, i) => Math.round(start + ratio * (endRgb[i] - start)));
+    return rgbToHex(interpolated);
+}
+
+function insertGradient() {
+    insertText(lastGeneratedGradient);
+}
+
+// Gradient exportieren/importieren
+function exportGradient() {
+    const blob = new Blob([lastGeneratedGradient], { type: "text/plain" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "gradient.txt";
+    link.click();
+}
+
+function importGradient() {
+    const fileInput = document.getElementById("import-file");
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+        document.getElementById("itemlore").value += reader.result;
+        updateTooltip();
+    };
+    reader.readAsText(file);
 }
