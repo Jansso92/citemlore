@@ -3,73 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minecraft Tooltip Editor</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link zur CSS-Datei -->
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <title>Minecraft Tooltip Generator</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div>
-        <h2>Vorschau</h2>
-        <div id="preview">
-            <strong>Itemname</strong><br>
-            <span style="color: #AAAAAA;">Lore Zeile 1</span><br>
-            <span style="color: #AAAAAA;">Lore Zeile 2</span>
+    <div class="container">
+        <!-- Tooltip Preview -->
+        <div id="tooltip-preview" class="tooltip">
+            <span id="item-name-preview"></span><br>
+            <span id="lore-preview"></span>
+        </div>
+
+        <!-- Input Fields -->
+        <div class="form">
+            <label for="itemname">Itemname:</label>
+            <input type="text" id="itemname" placeholder="Enter item name...">
+
+            <label for="lore">Lore:</label>
+            <div class="lore-container">
+                <textarea id="lore" placeholder="Enter lore..."></textarea>
+                <div id="lore-buttons"></div>
+            </div>
+
+            <label for="command">Command Prefix:</label>
+            <input type="text" id="command" placeholder="Enter command prefix...">
+
+            <!-- Color Buttons -->
+            <div class="colors">
+                <label>Colors:</label>
+                <div id="color-buttons"></div>
+            </div>
+
+            <!-- Text Modifiers -->
+            <div class="modifiers">
+                <button onclick="addModifier('&l')">Bold</button>
+                <button onclick="addModifier('&o')">Italic</button>
+                <button onclick="addModifier('&n')">Underline</button>
+                <button onclick="addModifier('&m')">Strikethrough</button>
+                <button onclick="addModifier('&r')">Reset</button>
+            </div>
+
+            <!-- Symbol Buttons -->
+            <div class="symbols">
+                <label>Symbols:</label>
+                <div id="symbol-container"></div>
+            </div>
         </div>
     </div>
 
-    <div>
-        <label for="itemname">Itemname</label>
-        <input type="text" id="itemname" placeholder="Itemname einfügen" onclick="setActiveField('itemname')">
-
-        <label for="lore">Lore</label>
-        <textarea id="lore" placeholder="Lore einfügen" onclick="setActiveField('lore')"></textarea>
-    </div>
-
-    <div>
-        <h3>Farbcodes</h3>
-        <div id="colors">
-            <span class="color-code" onclick="insertText('&0')">&0 Schwarz</span>
-            <span class="color-code" onclick="insertText('&1')">&1 Dunkelblau</span>
-            <span class="color-code" onclick="insertText('&2')">&2 Dunkelgrün</span>
-            <span class="color-code" onclick="insertText('&3')">&3 Dunkelaqua</span>
-            <span class="color-code" onclick="insertText('&4')">&4 Dunkelrot</span>
-            <span class="color-code" onclick="insertText('&5')">&5 Lila</span>
-            <span class="color-code" onclick="insertText('&6')">&6 Gold</span>
-            <span class="color-code" onclick="insertText('&7')">&7 Grau</span>
-            <span class="color-code" onclick="insertText('&8')">&8 Dunkelgrau</span>
-            <span class="color-code" onclick="insertText('&9')">&9 Blau</span>
-            <span class="color-code" onclick="insertText('&a')">&a Grün</span>
-            <span class="color-code" onclick="insertText('&b')">&b Aqua</span>
-            <span class="color-code" onclick="insertText('&c')">&c Rot</span>
-            <span class="color-code" onclick="insertText('&d')">&d Rosa</span>
-            <span class="color-code" onclick="insertText('&e')">&e Gelb</span>
-            <span class="color-code" onclick="insertText('&f')">&f Weiß</span>
-        </div>
-
-        <h3>Text-Effekte</h3>
-        <div id="effects">
-            <span class="effect-code" onclick="insertText('&l')">&l Fett</span>
-            <span class="effect-code" onclick="insertText('&o')">&o Kursiv</span>
-            <span class="effect-code" onclick="insertText('&n')">&n Unterstrichen</span>
-            <span class="effect-code" onclick="insertText('&m')">&m Durchgestrichen</span>
-            <span class="effect-code" onclick="insertText('&r')">&r Reset</span>
-        </div>
-
-        <h3>Chatsymbole</h3>
-        <div id="symbols">
-            <span class="symbol" onclick="insertText('❤')">❤ Herz</span>
-            <span class="symbol" onclick="insertText('★')">★ Stern</span>
-            <span class="symbol" onclick="insertText('✦')">✦ Funkel</span>
-            <span class="symbol" onclick="insertText('✔')">✔ Haken</span>
-            <span class="symbol" onclick="insertText('✖')">✖ Kreuz</span>
-            <span class="symbol" onclick="insertText('→')">→ Pfeil</span>
-            <span class="symbol" onclick="insertText('←')">← Pfeil</span>
-            <span class="symbol" onclick="insertText('↑')">↑ Pfeil</span>
-            <span class="symbol" onclick="insertText('↓')">↓ Pfeil</span>
-            <span class="symbol" onclick="insertText('•')">• Punkt</span>
-        </div>
-    </div>
-
-    <script src="script.js"></script> <!-- Link zur JavaScript-Datei -->
+    <script src="script.js"></script>
 </body>
 </html>
