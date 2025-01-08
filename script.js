@@ -86,6 +86,127 @@ function exportGradient() {
     link.click();
     URL.revokeObjectURL(url);
 }
+let colors = ["#ff0000"]; // Standardfarbschema
+
+// Vorschau aktualisieren
+function updateRGBPreview() {
+    const text = document.getElementById("rgb-text").value;
+    const preview = document.getElementById("rgb-preview");
+
+    if (!text || colors.length === 0) {
+        preview.textContent = "Gib Text und Farben ein.";
+        return;
+    }
+
+    preview.innerHTML = applyGradient(text, colors);
+}
+
+// Farbverlauf anwenden
+function applyGradient(text, colors) {
+    const steps = text.length;
+    const gradientSteps = colors.length - 1;
+    let gradientText = "";
+
+    for (let i = 0; i < steps; i++) {
+        const char = text[i];
+        const ratio = i / (steps - 1);
+
+        // Farbinterpolation
+        const startColorIndex = Math.floor(ratio * gradientSteps);
+        const endColorIndex = startColorIndex + 1;
+        const innerRatio = (ratio * gradientSteps) - startColorIndex;
+
+        const startColor = hexToRgb(colors[startColorIndex]);
+        const endColor = hexToRgb(colors[endColorIndex] || startColor);
+
+        const r = Math.round(startColor.r + innerRatio * (endColor.r - startColor.r));
+        const g = Math.round(startColor.g + innerRatio * (endColor.g - startColor.g));
+        const b = Math.round(startColor.b + innerRatio * (endColor.b - startColor.b));
+
+        gradientText += `<span style="color: rgb(${r},${g},${b})">${char}</span>`;
+    }
+
+    return gradientText;
+}
+
+// HEX zu RGB konvertieren
+function hexToRgb(hex) {
+    const bigint = parseInt(hex.slice(1), 16);
+    return {
+        r: (bigint >> 16) & 255,
+        g: (bigint >> 8) & 255,
+        b: bigint & 255,
+    };
+}
+
+// Farbe hinzufügen
+document.getElementById("add-color").addEventListener("click", () => {
+    const colorContainer = document.getElementById("color-container");
+    const newColor = document.createElement("input");
+    newColor.type = "color";
+    newColor.value = "#0000ff";
+    newColor.addEventListener("input", updateRGBPreview);
+
+    colors.push(newColor.value);
+    newColor.addEventListener("change", (e) => {
+        const index = Array.from(colorContainer.children).indexOf(e.target) - 1;
+        colors[index] = e.target.value;
+        updateRGBPreview();
+    });
+
+    colorContainer.appendChild(newColor);
+    updateRGBPreview();
+});
+
+// RGB Vorschau aktualisieren
+document.getElementById("rgb-text").addEventListener("input", updateRGBPreview);
+
+// Exportieren
+document.getElementById("export-scheme").addEventListener("click", () => {
+    const scheme = { text: document.getElementById("rgb-text").value, colors };
+    const blob = new Blob([JSON.stringify(scheme, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "rgb-scheme.json";
+    a.click();
+    URL.revokeObjectURL(url);
+});
+
+// Importieren
+document.getElementById("import-file").addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+        const scheme = JSON.parse(event.target.result);
+        document.getElementById("rgb-text").value = scheme.text;
+        colors = scheme.colors;
+
+        const colorContainer = document.getElementById("color-container");
+        colorContainer.innerHTML = '<label for="color1">Farbe 1:</label>';
+        colors.forEach((color) => {
+            const colorInput = document.createElement("input");
+            colorInput.type = "color";
+            colorInput.value = color;
+            colorInput.addEventListener("input", updateRGBPreview);
+
+            colorInput.addEventListener("change", (e) => {
+                const index = Array.from(colorContainer.children).indexOf(e.target) - 1;
+                colors[index] = e.target.value;
+                updateRGBPreview();
+            });
+
+            colorContainer.appendChild(colorInput);
+        });
+
+        updateRGBPreview();
+    };
+
+    reader.readAsText(file);
+});
 
 // Gradient importieren
 function importGradient() {
