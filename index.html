@@ -111,33 +111,33 @@
     <div>
         <h2>Farbcodes</h2>
         <div id="color-codes">
-            <button class="color-button" style="background-color: #000; color: #fff;" onclick="insertText('&0')">§0</button>
-            <button class="color-button" style="background-color: #00a; color: #fff;" onclick="insertText('&1')">§1</button>
-            <button class="color-button" style="background-color: #0a0; color: #fff;" onclick="insertText('&2')">§2</button>
-            <button class="color-button" style="background-color: #0aa; color: #fff;" onclick="insertText('&3')">§3</button>
-            <button class="color-button" style="background-color: #a00; color: #fff;" onclick="insertText('&4')">§4</button>
-            <button class="color-button" style="background-color: #a0a; color: #fff;" onclick="insertText('&5')">§5</button>
-            <button class="color-button" style="background-color: #fa0; color: #000;" onclick="insertText('&6')">§6</button>
-            <button class="color-button" style="background-color: #aaa; color: #000;" onclick="insertText('&7')">§7</button>
-            <button class="color-button" style="background-color: #555; color: #fff;" onclick="insertText('&8')">§8</button>
-            <button class="color-button" style="background-color: #55f; color: #fff;" onclick="insertText('&9')">§9</button>
-            <button class="color-button" style="background-color: #5f5; color: #000;" onclick="insertText('&a')">§a</button>
-            <button class="color-button" style="background-color: #5ff; color: #000;" onclick="insertText('&b')">§b</button>
-            <button class="color-button" style="background-color: #f55; color: #000;" onclick="insertText('&c')">§c</button>
-            <button class="color-button" style="background-color: #f5f; color: #000;" onclick="insertText('&d')">§d</button>
-            <button class="color-button" style="background-color: #ff5; color: #000;" onclick="insertText('&e')">§e</button>
-            <button class="color-button" style="background-color: #fff; color: #000;" onclick="insertText('&f')">§f</button>
+            <button class="color-button" style="background-color: #000; color: #fff;" onclick="insertText('&0')">&0</button>
+            <button class="color-button" style="background-color: #00a; color: #fff;" onclick="insertText('&1')">&1</button>
+            <button class="color-button" style="background-color: #0a0; color: #fff;" onclick="insertText('&2')">&2</button>
+            <button class="color-button" style="background-color: #0aa; color: #fff;" onclick="insertText('&3')">&3</button>
+            <button class="color-button" style="background-color: #a00; color: #fff;" onclick="insertText('&4')">&4</button>
+            <button class="color-button" style="background-color: #a0a; color: #fff;" onclick="insertText('&5')">&5</button>
+            <button class="color-button" style="background-color: #fa0; color: #000;" onclick="insertText('&6')">&6</button>
+            <button class="color-button" style="background-color: #aaa; color: #000;" onclick="insertText('&7')">&7</button>
+            <button class="color-button" style="background-color: #555; color: #fff;" onclick="insertText('&8')">&8</button>
+            <button class="color-button" style="background-color: #55f; color: #fff;" onclick="insertText('&9')">&9</button>
+            <button class="color-button" style="background-color: #5f5; color: #000;" onclick="insertText('&a')">&a</button>
+            <button class="color-button" style="background-color: #5ff; color: #000;" onclick="insertText('&b')">&b</button>
+            <button class="color-button" style="background-color: #f55; color: #000;" onclick="insertText('&c')">&c</button>
+            <button class="color-button" style="background-color: #f5f; color: #000;" onclick="insertText('&d')">&d</button>
+            <button class="color-button" style="background-color: #ff5; color: #000;" onclick="insertText('&e')">&e</button>
+            <button class="color-button" style="background-color: #fff; color: #000;" onclick="insertText('&f')">&f</button>
         </div>
     </div>
 
     <!-- Formatierungen -->
     <div>
         <h2>Formatierungen</h2>
-        <button class="button" onclick="insertText('&l')">Fett (§l)</button>
-        <button class="button" onclick="insertText('&m')">Durchgestrichen (§m)</button>
-        <button class="button" onclick="insertText('&n')">Unterstrichen (§n)</button>
-        <button class="button" onclick="insertText('&o')">Kursiv (§o)</button>
-        <button class="button" onclick="insertText('&r')">Zurücksetzen (§r)</button>
+        <button class="button" onclick="insertText('&l')">Fett (&l)</button>
+        <button class="button" onclick="insertText('&m')">Durchgestrichen (&m)</button>
+        <button class="button" onclick="insertText('&n')">Unterstrichen (&n)</button>
+        <button class="button" onclick="insertText('&o')">Kursiv (&o)</button>
+        <button class="button" onclick="insertText('&r')">Zurücksetzen (&r)</button>
     </div>
 
     <!-- Chatsymbole -->
@@ -146,6 +146,9 @@
         <button class="button" onclick="insertText('❤')">❤</button>
         <button class="button" onclick="insertText('★')">★</button>
         <button class="button" onclick="insertText('→')">→</button>
+        <div id="symbol-browser">
+    <input type="text" id="searchBar" placeholder="Search for a symbol...">
+    <div id="symbolList"></div>
     </div>
 
     <!-- RGB Generator -->
