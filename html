@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minecraft Item Editor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    .tooltip-preview {
+      width: 300px;
+      padding: 10px;
+      background-color: #2a2a2a;
+      color: white;
+      font-family: monospace;
+      border: 1px solid #000;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    input[type="text"], textarea, input[type="color"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    textarea {
+      height: 200px;
+      resize: vertical;
+      overflow-y: auto;
+    }
+
+    .preview-box {
+      margin-top: 10px;
+      padding: 10px;
+      background: linear-gradient(to right, #ff0000, #00ff00);
+      color: white;
+      font-family: monospace;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn {
+      margin-top: 10px;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+    }
+
+    .import-export {
+      margin-top: 20px;
+    }
+
+    .import-export input {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Minecraft Item Editor</h1>
+
+  <!-- Tooltip Vorschau -->
+  <div class="tooltip-preview">
+    <div class="item-name" id="tooltip-name">Itemname</div>
+    <div id="tooltip-lore">Itembeschreibung hier...</div>
+  </div>
+
+  <!-- Eingabefelder mit Rechtschreibprüfung -->
+  <label for="itemname">Itemname</label>
+  <input type="text" id="itemname" placeholder="Gib den Itemnamen ein" spellcheck="true" oninput="updateTooltip()">
+
+  <label for="itemlore">Itemlore</label>
+  <textarea id="itemlore" placeholder="Gib den Itemlore ein" spellcheck="true" oninput="updateTooltip()"></textarea>
+
+  <!-- Schriftfarben Generator -->
+  <div class="color-generator">
+    <h3>Schriftfarben Generator</h3>
+    <label>Startfarbe:</label>
+    <input type="color" id="start-color" value="#ff0000">
+    <label>Endfarbe:</label>
+    <input type="color" id="end-color" value="#00ff00">
+    <div class="preview-box" id="gradient-preview">Vorschau: Gradient</div>
+    <button class="btn" onclick="applyGradient()">Gradient erzeugen</button>
+    <button class="btn" onclick="applyRandomGradient()">Zufallsgradient</button>
+    <button class="btn" onclick="insertGradient()">In Itemlore einfügen</button>
+
+    <!-- Import/Export-Funktionen -->
+    <div class="import-export">
+      <h3>Vorlagen</h3>
+      <button class="btn" onclick="exportTemplate()">Exportieren</button>
+      <label for="file-input" class="btn">Importieren</label>
+      <input type="file" id="file-input" accept=".txt" onchange="importTemplate(event)">
+    </div>
+  </div>
+
+  <script>
+    function updateTooltip() {
+      document.getElementById("tooltip-name").textContent = document.getElementById("itemname").value || "Itemname";
+      document.getElementById("tooltip-lore").textContent = document.getElementById("itemlore").value || "Itembeschreibung hier...";
+    }
+
+    function applyGradient() {
+      const startColor = document.getElementById("start-color").value;
+      const endColor = document.getElementById("end-color").value;
+
+      const gradientPreview = document.getElementById("gradient-preview");
+      gradientPreview.style.background = `linear-gradient(to right, ${startColor}, ${endColor})`;
+      gradientPreview.textContent = `Vorschau: Gradient`;
+    }
+
+    function applyRandomGradient() {
+      const randomColor = () => `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, "0")}`;
+      document.getElementById("start-color").value = randomColor();
+      document.getElementById("end-color").value = randomColor();
+      applyGradient();
+    }
+
+    function insertGradient() {
+      const startColor = document.getElementById("start-color").value;
+      const endColor = document.getElementById("end-color").value;
+
+      const gradientText = `Gradient von ${startColor} bis ${endColor}`;
+      const loreField = document.getElementById("itemlore");
+      loreField.value += gradientText + "\n";
+      loreField.focus();
+    }
+
+    function exportTemplate() {
+      const startColor = document.getElementById("start-color").value;
+      const endColor = document.getElementById("end-color").value;
+      const template = {
+        startColor: startColor,
+        endColor: endColor
+      };
+
+      const blob = new Blob([JSON.stringify(template, null, 2)], { type: "text/plain" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "gradient-template.txt";
+      link.click();
+    }
+
+    function importTemplate(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          try {
+            const template = JSON.parse(e.target.result);
+            if (template.startColor && template.endColor) {
+              document.getElementById("start-color").value = template.startColor;
+              document.getElementById("end-color").value = template.endColor;
+              applyGradient();
+              alert("Vorlage erfolgreich geladen!");
+            } else {
+              alert("Ungültige Vorlage-Datei.");
+            }
+          } catch (err) {
+            alert("Fehler beim Laden der Vorlage.");
+          }
+        };
+        reader.readAsText(file);
+      }
+    }
+  </script>
+</body>
+</html>
