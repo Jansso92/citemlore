@@ -21,3 +21,23 @@
 .mc-color-n { text-decoration: underline; }
 .mc-color-o { font-style: italic; }
 .mc-color-r { color: #ffffff; font-style: normal; font-weight: normal; text-decoration: none; }
+#rgb-generator {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #7289da;
+    background-color: #23272a;
+    border-radius: 10px;
+}
+
+#color-container input[type="color"] {
+    margin: 5px;
+}
+
+#rgb-preview {
+    font-family: monospace;
+    padding: 10px;
+    background-color: #1e2124;
+    border: 1px solid #7289da;
+    overflow: auto;
+    white-space: nowrap;
+}
