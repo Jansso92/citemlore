@@ -1,48 +1,23 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #1e1e1e;
-    color: #ffffff;
-    padding: 20px;
-}
-
-h1 {
-    text-align: center;
-}
-
-textarea {
-    width: 100%;
-    height: 100px;
-    resize: vertical;
-    margin-bottom: 10px;
-}
-
-button {
-    margin: 5px;
-    padding: 5px 10px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #555;
-}
-
-.tooltip-preview {
-    background-color: #2a2a2a;
-    color: #ffffff;
-    font-family: monospace;
-    padding: 10px;
-    border: 1px solid #000;
-    border-radius: 5px;
-    margin-bottom: 20px;
-}
-
-.tooltip-preview span {
-    display: inline;
-}
-
-#rgb-generator input[type="color"] {
-    margin: 5px;
-}
+/* Minecraft Farbcodes */
+.mc-color-0 { color: #000000; }
+.mc-color-1 { color: #0000aa; }
+.mc-color-2 { color: #00aa00; }
+.mc-color-3 { color: #00aaaa; }
+.mc-color-4 { color: #aa0000; }
+.mc-color-5 { color: #aa00aa; }
+.mc-color-6 { color: #ffaa00; }
+.mc-color-7 { color: #aaaaaa; }
+.mc-color-8 { color: #555555; }
+.mc-color-9 { color: #5555ff; }
+.mc-color-a { color: #55ff55; }
+.mc-color-b { color: #55ffff; }
+.mc-color-c { color: #ff5555; }
+.mc-color-d { color: #ff55ff; }
+.mc-color-e { color: #ffff55; }
+.mc-color-f { color: #ffffff; }
+.mc-color-k { text-shadow: 1px 0px 1px rgba(255, 255, 255, 0.2); }
+.mc-color-l { font-weight: bold; }
+.mc-color-m { text-decoration: line-through; }
+.mc-color-n { text-decoration: underline; }
+.mc-color-o { font-style: italic; }
+.mc-color-r { color: #ffffff; font-style: normal; font-weight: normal; text-decoration: none; }
