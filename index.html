@@ -149,23 +149,28 @@
     </div>
 
     <!-- RGB Generator -->
-    <div id="gradient-container">
-        <h2>RGB Farbtext Generator</h2>
-        <div>
-            <label for="rgb-text">Text:</label>
-            <input type="text" id="rgb-text">
-        </div>
-        <div>
-            <label for="start-color">Startfarbe:</label>
-            <input type="color" id="start-color" value="#ff0000">
-            <label for="end-color">Endfarbe:</label>
-            <input type="color" id="end-color" value="#0000ff">
-        </div>
-        <button class="button" onclick="generateRGB()">Gradient erstellen</button>
-        <button class="button" onclick="insertGradient()">In Lore einfügen</button>
-        <button class="button" onclick="exportGradient()">Exportieren</button>
-        <input type="file" id="import-file" onchange="importGradient()" accept=".txt">
+<div id="rgb-generator">
+    <h2>RGB Farbtext Generator</h2>
+
+    <!-- Text zum Formatieren -->
+    <label for="rgb-text">Text:</label>
+    <input type="text" id="rgb-text" placeholder="Gib hier deinen Text ein...">
+
+    <!-- Farbschema -->
+    <div id="color-container">
+        <label for="color1">Farbe 1:</label>
+        <input type="color" id="color1" value="#ff0000">
     </div>
+    <button id="add-color" class="button">Farbe hinzufügen</button>
+
+    <!-- Vorschau -->
+    <h3>Vorschau</h3>
+    <div id="rgb-preview" class="preview"></div>
+
+    <!-- Export/Import Buttons -->
+    <button id="export-scheme" class="button">Exportieren</button>
+    <input type="file" id="import-file" class="button" accept=".json">
+</div>
     <script>
         // Hier kommt der JavaScript Code hin.
     </script>
