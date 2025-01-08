@@ -1,72 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minecraft Item Editor</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <h1>Minecraft Item Editor</h1>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1e1e1e;
+    color: #ffffff;
+    padding: 20px;
+}
 
-    <!-- Vorschau -->
-    <div id="tooltip-preview" class="tooltip-preview">
-        <div id="tooltip-name">Itemname</div>
-        <div id="tooltip-lore">Itembeschreibung hier...</div>
-    </div>
+h1 {
+    text-align: center;
+}
 
-    <!-- Eingabefelder -->
-    <div>
-        <label for="itemname">Itemname:</label>
-        <input type="text" id="itemname" oninput="updateTooltip()" placeholder="Gib den Itemnamen ein">
-    </div>
-    <div>
-        <label for="itemlore">Itemlore:</label>
-        <textarea id="itemlore" oninput="updateTooltip()" placeholder="Gib die Itembeschreibung ein"></textarea>
-    </div>
+textarea {
+    width: 100%;
+    height: 100px;
+    resize: vertical;
+    margin-bottom: 10px;
+}
 
-    <!-- Farbcode-Tabelle -->
-    <h2>Farbcodes</h2>
-    <div id="color-switch">
-        <button onclick="switchColorCodeType()">Wechsel zu: §</button>
-    </div>
-    <div id="color-codes">
-        <button onclick="insertText('&0')">Schwarz</button>
-        <button onclick="insertText('&1')">Dunkelblau</button>
-        <button onclick="insertText('&2')">Dunkelgrün</button>
-        <button onclick="insertText('&3')">Dunkelcyan</button>
-        <button onclick="insertText('&4')">Dunkelrot</button>
-        <button onclick="insertText('&5')">Lila</button>
-        <button onclick="insertText('&6')">Gold</button>
-        <button onclick="insertText('&7')">Hellgrau</button>
-        <button onclick="insertText('&8')">Dunkelgrau</button>
-        <button onclick="insertText('&9')">Blau</button>
-        <button onclick="insertText('&a')">Hellgrün</button>
-        <button onclick="insertText('&b')">Hellcyan</button>
-        <button onclick="insertText('&c')">Hellrot</button>
-        <button onclick="insertText('&d')">Pink</button>
-        <button onclick="insertText('&e')">Gelb</button>
-        <button onclick="insertText('&f')">Weiß</button>
-    </div>
+button {
+    margin: 5px;
+    padding: 5px 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
 
-    <!-- Formatierungscodes -->
-    <h2>Formatierungscodes</h2>
-    <div id="format-codes">
-        <button onclick="insertText('&l')">Fett</button>
-        <button onclick="insertText('&m')">Durchgestrichen</button>
-        <button onclick="insertText('&n')">Unterstrichen</button>
-        <button onclick="insertText('&o')">Kursiv</button>
-        <button onclick="insertText('&r')">Reset</button>
-    </div>
+button:hover {
+    background-color: #555;
+}
 
-    <!-- Symbole -->
-    <h2>Symbole</h2>
-    <div id="symbols">
-        <button onclick="insertText('❤')">♥</button>
-        <button onclick="insertText('★')">★</button>
-        <button onclick="insertText('→')">→</button>
-    </div>
+.tooltip-preview {
+    background-color: #2a2a2a;
+    color: #ffffff;
+    font-family: monospace;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
 
-    <script src="script.js"></script>
-</body>
-</html>
+.tooltip-preview span {
+    display: inline;
+}
+
+#rgb-generator input[type="color"] {
+    margin: 5px;
+}
