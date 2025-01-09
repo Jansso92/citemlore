@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Custom Itemlore</title>
-    <link rel="stylesheet" href="style.css"> <!-- Verlinkung zu deiner CSS-Datei -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -15,22 +15,33 @@
 
     <!-- Tooltip-Container -->
     <div class="tooltip-container">
-        <div class="minecraft-tooltip">
-            <div class="tooltip-itemname">Item Name</div>
-            <div class="tooltip-lore">
+        <div class="minecraft-tooltip" id="tooltip-preview">
+            <div class="tooltip-itemname" id="itemname-preview">Item Name</div>
+            <div class="tooltip-lore" id="lore-preview">
                 <div>Item lore line 1</div>
                 <div>Item lore line 2</div>
             </div>
         </div>
     </div>
 
-    <!-- Eingabefelder -->
+    <!-- Eingabefelder und Buttons -->
     <div class="input-container">
         <label for="itemname">Item Name:</label>
         <input type="text" id="itemname" placeholder="Enter item name">
         
         <label for="itemlore">Item Lore:</label>
         <textarea id="itemlore" placeholder="Enter item lore"></textarea>
+        
+        <div class="button-container">
+            <div class="format-buttons">
+                <button onclick="applyBold()">Bold</button>
+                <button onclick="applyItalic()">Italic</button>
+                <button onclick="applyUnderline()">Underline</button>
+                <button onclick="applyColor()">Set Color</button>
+            </div>
+        </div>
+
+        <button onclick="copyTooltip()">Copy Tooltip</button>
     </div>
 
     <!-- Footer mit Links -->
@@ -43,5 +54,6 @@
         </ul>
     </footer>
 
+    <script src="script.js"></script>
 </body>
 </html>
