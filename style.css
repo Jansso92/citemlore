@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Minecraftia', sans-serif; /* Minecraft-Schrift für die gesamte Seite */
     background-color: #f6f8fa;
     color: #24292e;
     margin: 0;
@@ -22,7 +22,8 @@ h1 {
     border: 1px solid #444;
     padding: 10px;
     margin: 10px 0;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Minecraftia', sans-serif; /* Minecraft-Schrift nur für die Vorschau */
+    font-size: 14px;
     text-align: left;
     min-height: 100px;
     white-space: pre-wrap;
