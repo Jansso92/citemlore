@@ -1,81 +1,64 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom ItemLore Generator</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header>
-        <h1>Custom ItemLore Generator</h1>
-    </header>
+// Funktion zum Einfügen von Text an der aktuellen Cursorposition im Textarea
+function insertText(text) {
+    const textarea = document.getElementById('itemlore');
+    const cursorPos = textarea.selectionStart;
+    const textBefore = textarea.value.substring(0, cursorPos);
+    const textAfter = textarea.value.substring(cursorPos);
+    textarea.value = textBefore + text + textAfter;
+    // Cursor nach dem eingefügten Text positionieren
+    textarea.selectionStart = textarea.selectionEnd = cursorPos + text.length;
+    textarea.focus();
+    updatePreview();
+}
 
-    <section class="input-container">
-        <h2>Itemname</h2>
-        <input type="text" id="itemname" placeholder="Gib den Itemnamen hier ein" />
+// Funktion zum Aktualisieren der Tooltip-Vorschau
+function updatePreview() {
+    const loreText = document.getElementById('itemlore').value;
+    // Text mit Farbcodes und Effekten für die Vorschau formatieren
+    const formattedText = formatText(loreText);
+    document.getElementById('tooltip-lore-preview').innerHTML = formattedText;
+}
 
-        <h2>Item Lore</h2>
-        <textarea id="itemlore" placeholder="Gib deinen Item Lore Text hier ein..."></textarea>
+// Funktion zum Formatieren des Textes (unterstützt Minecraft Farbcodes, Effekte und HTML-Codes)
+function formatText(text) {
+    // HTML entitäten wie &#001122 werden umgesetzt
+    const htmlText = text.replace(/&#\d+;/g, match => {
+        return `<span>${String.fromCharCode(match.match(/\d+/)[0])}</span>`;
+    });
 
-        <div class="button-container">
-            <button onclick="copyToClipboard()">In Zwischenablage kopieren</button>
-        </div>
+    // Farb- und Effekt-Codes
+    const colorCodeMap = {
+        '&0': '<span style="color: #000000">', '&1': '<span style="color: #0000AA">',
+        '&2': '<span style="color: #00AA00">', '&3': '<span style="color: #00AAAA">',
+        '&4': '<span style="color: #AA0000">', '&5': '<span style="color: #AA00AA">',
+        '&6': '<span style="color: #FFAA00">', '&7': '<span style="color: #AAAAAA">',
+        '&8': '<span style="color: #555555">', '&9': '<span style="color: #5555FF">',
+        '&a': '<span style="color: #55FF55">', '&b': '<span style="color: #55FFFF">',
+        '&c': '<span style="color: #FF5555">', '&d': '<span style="color: #FF55FF">',
+        '&e': '<span style="color: #FFFF55">', '&f': '<span style="color: #FFFFFF">',
+        '&l': '<span style="font-weight: bold; font-size: 14px;">', '&o': '<span style="font-style: italic; font-size: 14px;">',
+        '&n': '<span style="text-decoration: underline; font-size: 14px;">', '&m': '<span style="text-decoration: line-through; font-size: 14px;">',
+        '&r': '<span style="font-weight: normal; font-style: normal; text-decoration: none; font-size: 14px;">'
+    };
 
-        <div id="colors">
-            <h3>Farbcodes</h3>
-            <span class="color-code" onclick="insertText('&0')">Schwarz</span>
-            <span class="color-code" onclick="insertText('&1')">Dunkelblau</span>
-            <span class="color-code" onclick="insertText('&2')">Dunkelgrün</span>
-            <span class="color-code" onclick="insertText('&3')">Dunkelaqua</span>
-            <span class="color-code" onclick="insertText('&4')">Dunkelrot</span>
-            <span class="color-code" onclick="insertText('&5')">Lila</span>
-            <span class="color-code" onclick="insertText('&6')">Gold</span>
-            <span class="color-code" onclick="insertText('&7')">Grau</span>
-            <span class="color-code" onclick="insertText('&8')">Dunkelgrau</span>
-            <span class="color-code" onclick="insertText('&9')">Blau</span>
-        </div>
+    let formattedText = htmlText;
 
-        <div id="effects">
-            <h3>Text-Effekte</h3>
-            <span class="effect-code" onclick="insertText('&l')">Fett</span>
-            <span class="effect-code" onclick="insertText('&o')">Kursiv</span>
-            <span class="effect-code" onclick="insertText('&n')">Unterstrichen</span>
-            <span class="effect-code" onclick="insertText('&m')">Durchgestrichen</span>
-            <span class="effect-code" onclick="insertText('&r')">Reset</span>
-        </div>
+    Object.keys(colorCodeMap).forEach(code => {
+        const regex = new RegExp(code, 'g');
+        formattedText = formattedText.replace(regex, colorCodeMap[code] + '$&</span>');
+    });
 
-        <div id="symbols">
-            <h3>Symbole</h3>
-            <span class="symbol" onclick="insertText('❤')">❤ Herz</span>
-            <span class="symbol" onclick="insertText('★')">★ Stern</span>
-            <span class="symbol" onclick="insertText('✦')">✦ Funkel</span>
-            <span class="symbol" onclick="insertText('✔')">✔ Haken</span>
-            <span class="symbol" onclick="insertText('✖')">✖ Kreuz</span>
-            <span class="symbol" onclick="insertText('→')">→ Pfeil</span>
-            <span class="symbol" onclick="insertText('←')">← Pfeil</span>
-            <span class="symbol" onclick="insertText('↑')">↑ Pfeil</span>
-            <span class="symbol" onclick="insertText('↓')">↓ Pfeil</span>
-            <span class="symbol" onclick="insertText('•')">• Punkt</span>
-        </div>
-    </section>
+    return formattedText;
+}
 
-    <section class="tooltip-container">
-        <div class="minecraft-tooltip">
-            <div class="tooltip-itemname" id="tooltip-itemname">Itemname</div>
-            <div id="tooltip-lore-preview">Lore Vorschau</div>
-        </div>
-    </section>
-
-    <footer>
-        <h3>Links</h3>
-        <ul>
-            <li><a href="#">RGB Generator</a></li>
-            <li><a href="#">Nützliche Tools</a></li>
-            <li><a href="#">Sonstige</a></li>
-        </ul>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
+// Funktion zum Kopieren des Textes in die Zwischenablage
+function copyToClipboard() {
+    const loreText = document.getElementById('itemlore').value;
+    const tempTextarea = document.createElement('textarea');
+    tempTextarea.value = loreText;
+    document.body.appendChild(tempTextarea);
+    tempTextarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempTextarea);
+    alert("Text in die Zwischenablage kopiert!");
+}
