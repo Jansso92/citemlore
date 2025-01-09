@@ -3,74 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Item Lore Generator</title>
+    <title>Custom ItemLore</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Custom Item Lore Generator</h1>
-    </header>
-
     <div class="container">
-        <!-- Eingabefelder für Itemname und Lore -->
-        <div class="input-container">
-            <label for="itemname">Itemname:</label>
-            <input type="text" id="itemname" placeholder="Gib den Itemname ein" oninput="updatePreview()">
+        <h1>Custom ItemLore</h1>
 
-            <label for="lore">Lore:</label>
-            <textarea id="lore" placeholder="Gib die Lore ein" oninput="updatePreview()"></textarea>
+        <!-- Tooltip Vorschaufenster -->
+        <div id="preview" class="tooltip"></div>
+
+        <!-- Item Name Eingabefeld -->
+        <label for="item-name">Item Name:</label>
+        <input id="item-name" type="text" placeholder="Name hier eingeben">
+
+        <!-- Item Lore Eingabefeld -->
+        <label for="item-lore">Item Lore:</label>
+        <textarea id="item-lore" placeholder="Lore hier eingeben"></textarea>
+
+        <!-- Farbcodes und Formatierungen -->
+        <div class="color-buttons">
+            <h2>Farbcodes</h2>
+            <div id="color-code-buttons"></div>
+            <h2>Formatierungen</h2>
+            <div id="format-buttons"></div>
         </div>
 
-        <!-- Farbcodes und Effekte -->
-        <div class="button-container">
-            <h3>Farbcodes</h3>
-            <div id="colors">
-                <span class="color-code" style="background-color: black;" onclick="insertText('&0')">&0 Schwarz</span>
-                <span class="color-code" style="background-color: darkblue;" onclick="insertText('&1')">&1 Dunkelblau</span>
-                <span class="color-code" style="background-color: darkgreen;" onclick="insertText('&2')">&2 Dunkelgrün</span>
-                <span class="color-code" style="background-color: darkaqua;" onclick="insertText('&3')">&3 Dunkelaqua</span>
-                <span class="color-code" style="background-color: darkred;" onclick="insertText('&4')">&4 Dunkelrot</span>
-                <span class="color-code" style="background-color: darkviolet;" onclick="insertText('&5')">&5 Lila</span>
-                <span class="color-code" style="background-color: gold;" onclick="insertText('&6')">&6 Gold</span>
-                <span class="color-code" style="background-color: gray;" onclick="insertText('&7')">&7 Grau</span>
-                <span class="color-code" style="background-color: darkgray;" onclick="insertText('&8')">&8 Dunkelgrau</span>
-                <span class="color-code" style="background-color: blue;" onclick="insertText('&9')">&9 Blau</span>
-                <span class="color-code" style="background-color: green;" onclick="insertText('&a')">&a Grün</span>
-                <span class="color-code" style="background-color: aqua;" onclick="insertText('&b')">&b Aqua</span>
-                <span class="color-code" style="background-color: red;" onclick="insertText('&c')">&c Rot</span>
-                <span class="color-code" style="background-color: pink;" onclick="insertText('&d')">&d Rosa</span>
-                <span class="color-code" style="background-color: yellow;" onclick="insertText('&e')">&e Gelb</span>
-                <span class="color-code" style="background-color: white;" onclick="insertText('&f')">&f Weiß</span>
-            </div>
-
-            <h3>Text-Effekte</h3>
-            <div id="effects">
-                <span class="effect-code" onclick="insertText('&l')">&l Fett</span>
-                <span class="effect-code" onclick="insertText('&o')">&o Kursiv</span>
-                <span class="effect-code" onclick="insertText('&n')">&n Unterstrichen</span>
-                <span class="effect-code" onclick="insertText('&m')">&m Durchgestrichen</span>
-                <span class="effect-code" onclick="insertText('&r')">&r Reset</span>
+        <!-- Minecraft-Symbole -->
+        <div class="symbols">
+            <h2>Symbole</h2>
+            <div id="symbols">
+                <button onclick="insertSymbol('❤')">❤</button>
+                <button onclick="insertSymbol('★')">★</button>
+                <button onclick="insertSymbol('✔')">✔</button>
             </div>
         </div>
 
-        <!-- Tooltip-Vorschau -->
-        <div class="tooltip-container">
-            <div class="minecraft-tooltip">
-                <div id="preview-itemname" class="tooltip-itemname"></div>
-                <div id="preview-lore" class="tooltip-lore"></div>
-            </div>
-        </div>
+        <!-- Links -->
+        <footer>
+            <h2>RGB Generator</h2>
+            <ul>
+                <li><a href="#">Link 1</a></li>
+                <li><a href="#">Link 2</a></li>
+                <li><a href="#">Link 3</a></li>
+            </ul>
+            <h2>Tools</h2>
+            <ul>
+                <li><a href="#">Link 1</a></li>
+                <li><a href="#">Link 2</a></li>
+                <li><a href="#">Link 3</a></li>
+            </ul>
+            <h2>Sonstiges</h2>
+            <ul>
+                <li><a href="#">Link 1</a></li>
+                <li><a href="#">Link 2</a></li>
+                <li><a href="#">Link 3</a></li>
+            </ul>
+        </footer>
     </div>
-
-    <footer>
-        <h3>Links</h3>
-        <ul>
-            <li><a href="#">RGB Generator</a></li>
-            <li><a href="#">Nützliche Tools</a></li>
-            <li><a href="#">Sonstige</a></li>
-        </ul>
-    </footer>
-
     <script src="script.js"></script>
 </body>
 </html>
