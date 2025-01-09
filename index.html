@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,47 +8,90 @@
 </head>
 <body>
     <div class="container">
-        <!-- Tooltip Preview -->
-        <div id="tooltip-preview" class="tooltip">
-            <span id="item-name-preview"></span><br>
-            <span id="lore-preview"></span>
+        <header>
+            <h1>Minecraft Tooltip Generator</h1>
+            <h2>Custom Itemlore</h2>
+        </header>
+
+        <div class="tooltip-preview">
+            <div id="tooltip">
+                <span id="tooltip-itemname">Item Name</span>
+                <div id="tooltip-lore"></div>
+            </div>
         </div>
 
-        <!-- Input Fields -->
         <div class="form">
             <label for="itemname">Itemname:</label>
-            <input type="text" id="itemname" placeholder="Enter item name...">
+            <input type="text" id="itemname" placeholder="Enter item name" oninput="updateTooltipItemname()">
 
             <label for="lore">Lore:</label>
-            <div class="lore-container">
-                <textarea id="lore" placeholder="Enter lore..."></textarea>
-                <div id="lore-buttons"></div>
+            <div id="lore-container">
+                <textarea id="lore" placeholder="Enter lore" oninput="updateTooltipLore()"></textarea>
             </div>
 
-            <label for="command">Command Prefix:</label>
-            <input type="text" id="command" placeholder="Enter command prefix...">
+            <label for="command">Befehl:</label>
+            <input type="text" id="command" placeholder="Enter command prefix">
 
-            <!-- Color Buttons -->
-            <div class="colors">
-                <label>Colors:</label>
-                <div id="color-buttons"></div>
+            <div id="color-buttons">
+                <button onclick="addColorCode('&0')">Black</button>
+                <button onclick="addColorCode('&1')">Dark Blue</button>
+                <button onclick="addColorCode('&2')">Dark Green</button>
+                <button onclick="addColorCode('&3')">Dark Aqua</button>
+                <button onclick="addColorCode('&4')">Dark Red</button>
+                <button onclick="addColorCode('&5')">Dark Purple</button>
+                <button onclick="addColorCode('&6')">Gold</button>
+                <button onclick="addColorCode('&7')">Gray</button>
+                <button onclick="addColorCode('&8')">Dark Gray</button>
+                <button onclick="addColorCode('&9')">Blue</button>
+                <button onclick="addColorCode('&a')">Green</button>
+                <button onclick="addColorCode('&b')">Aqua</button>
+                <button onclick="addColorCode('&c')">Red</button>
+                <button onclick="addColorCode('&d')">Light Purple</button>
+                <button onclick="addColorCode('&e')">Yellow</button>
+                <button onclick="addColorCode('&f')">White</button>
+                <button onclick="addColorCode('&l')">Bold</button>
+                <button onclick="addColorCode('&o')">Italic</button>
+                <button onclick="addColorCode('&n')">Underline</button>
+                <button onclick="addColorCode('&m')">Strikethrough</button>
+                <button onclick="addColorCode('&r')">Reset</button>
             </div>
 
-            <!-- Text Modifiers -->
-            <div class="modifiers">
-                <button onclick="addModifier('&l')">Bold</button>
-                <button onclick="addModifier('&o')">Italic</button>
-                <button onclick="addModifier('&n')">Underline</button>
-                <button onclick="addModifier('&m')">Strikethrough</button>
-                <button onclick="addModifier('&r')">Reset</button>
-            </div>
-
-            <!-- Symbol Buttons -->
-            <div class="symbols">
-                <label>Symbols:</label>
-                <div id="symbol-container"></div>
+            <div id="symbol-buttons">
+                <p>Symbols:</p>
+                <div class="symbols-container">
+                    ❤ ❥ ✔ ✖ ✗ ✘ ❂ ⋆ ✢ ✣ ✤ ✥ ✦ ✩ ✪ ✫ ✬ ✭ ✮ ✯ ✰ ★
+                </div>
             </div>
         </div>
+
+        <footer>
+            <section>
+                <h3>RGB Generator</h3>
+                <ul>
+                    <li><a href="#">Platzhalter 1</a></li>
+                    <li><a href="#">Platzhalter 2</a></li>
+                    <li><a href="#">Platzhalter 3</a></li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Nützliche Tools</h3>
+                <ul>
+                    <li><a href="#">Platzhalter 1</a></li>
+                    <li><a href="#">Platzhalter 2</a></li>
+                    <li><a href="#">Platzhalter 3</a></li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Sonstige</h3>
+                <ul>
+                    <li><a href="#">Platzhalter 1</a></li>
+                    <li><a href="#">Platzhalter 2</a></li>
+                    <li><a href="#">Platzhalter 3</a></li>
+                </ul>
+            </section>
+        </footer>
     </div>
 
     <script src="script.js"></script>
