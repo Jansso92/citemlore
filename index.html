@@ -1,64 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Custom Itemlore</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css"> <!-- Verlinkung zu deiner CSS-Datei -->
 </head>
 <body>
+
+    <!-- Header -->
     <header>
-        <h1>Custom Itemlore</h1>
+        Custom Itemlore
     </header>
-    <main>
-        <div class="tooltip-container">
-            <div class="minecraft-tooltip">
-                <div id="tooltip-itemname" class="tooltip-itemname">Item Name</div>
-                <div id="tooltip-lore" class="tooltip-lore"></div>
+
+    <!-- Tooltip-Container -->
+    <div class="tooltip-container">
+        <div class="minecraft-tooltip">
+            <div class="tooltip-itemname">Item Name</div>
+            <div class="tooltip-lore">
+                <div>Item lore line 1</div>
+                <div>Item lore line 2</div>
             </div>
         </div>
+    </div>
 
-        <div class="input-container">
-            <label for="itemname">Item Name</label>
-            <input type="text" id="itemname" placeholder="Enter item name" oninput="updateTooltipItemname()">
-
-            <label for="lore">Lore</label>
-            <textarea id="lore" placeholder="Enter lore here" oninput="updateTooltipLore()"></textarea>
-        </div>
-
-        <div class="button-container">
-            <h2>Formatting Codes</h2>
-            <div class="format-buttons">
-                <button onclick="addColorCode('&0')" style="color: #000;">&0</button>
-                <button onclick="addColorCode('&1')" style="color: #00a;">&1</button>
-                <button onclick="addColorCode('&2')" style="color: #0a0;">&2</button>
-                <!-- Add more buttons for other color codes -->
-            </div>
-        </div>
+    <!-- Eingabefelder -->
+    <div class="input-container">
+        <label for="itemname">Item Name:</label>
+        <input type="text" id="itemname" placeholder="Enter item name">
         
-        <footer>
-            <div class="links">
-                <h3>RGB Generator</h3>
-                <ul>
-                    <li><a href="#">Link 1</a></li>
-                    <li><a href="#">Link 2</a></li>
-                    <li><a href="#">Link 3</a></li>
-                </ul>
-                <h3>Nützliche Tools</h3>
-                <ul>
-                    <li><a href="#">Link 1</a></li>
-                    <li><a href="#">Link 2</a></li>
-                    <li><a href="#">Link 3</a></li>
-                </ul>
-                <h3>Sonstige</h3>
-                <ul>
-                    <li><a href="#">Link 1</a></li>
-                    <li><a href="#">Link 2</a></li>
-                    <li><a href="#">Link 3</a></li>
-                </ul>
-            </div>
-        </footer>
-    </main>
-    <script src="script.js"></script>
+        <label for="itemlore">Item Lore:</label>
+        <textarea id="itemlore" placeholder="Enter item lore"></textarea>
+    </div>
+
+    <!-- Footer mit Links -->
+    <footer>
+        <h3>Weitere Links</h3>
+        <ul>
+            <li><a href="#">RGB Generator</a></li>
+            <li><a href="#">Nützliche Tools</a></li>
+            <li><a href="#">Sonstiges</a></li>
+        </ul>
+    </footer>
+
 </body>
 </html>
