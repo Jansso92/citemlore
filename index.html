@@ -1,61 +1,89 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Custom Itemlore</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <!-- Header -->
     <header>
         Custom Itemlore
     </header>
 
-    <!-- Tooltip-Container -->
     <div class="tooltip-container">
         <div class="minecraft-tooltip" id="tooltip-preview">
-            <div class="tooltip-itemname" id="itemname-preview">Item Name</div>
-            <div class="tooltip-lore" id="lore-preview">
-                <div>Item lore line 1</div>
-                <div>Item lore line 2</div>
+            <div class="tooltip-itemname">Itemname</div>
+            <div class="tooltip-lore" id="tooltip-lore-preview">
+                Lorem ipsum dolor sit amet
             </div>
         </div>
     </div>
 
-    <!-- Eingabefelder und Buttons -->
     <div class="input-container">
-        <label for="itemname">Item Name:</label>
-        <input type="text" id="itemname" placeholder="Enter item name">
-        
-        <label for="itemlore">Item Lore:</label>
-        <textarea id="itemlore" placeholder="Enter item lore"></textarea>
-        
+        <label for="itemlore">Item Lore Text:</label>
+        <textarea id="itemlore" placeholder="Geben Sie den Item Lore Text hier ein..."></textarea>
         <div class="button-container">
-            <div class="format-buttons">
-                <button onclick="applyBold()"><b>B</b></button>
-                <button onclick="applyItalic()"><i>I</i></button>
-                <button onclick="applyUnderline()">U</button>
-                <button onclick="applyColor()">Set Color</button>
-            </div>
+            <button onclick="copyToClipboard()">Kopieren</button>
         </div>
 
-        <div id="lore-buttons-container"></div>
-        
-        <button onclick="copyTooltip()">Copy Tooltip</button>
+        <h3>Farbcodes</h3>
+        <div id="colors">
+            <button class="color-code" onclick="insertText('&0')">&0 Schwarz</button>
+            <button class="color-code" onclick="insertText('&1')">&1 Dunkelblau</button>
+            <button class="color-code" onclick="insertText('&2')">&2 Dunkelgrün</button>
+            <button class="color-code" onclick="insertText('&3')">&3 Dunkelaqua</button>
+            <button class="color-code" onclick="insertText('&4')">&4 Dunkelrot</button>
+            <button class="color-code" onclick="insertText('&5')">&5 Lila</button>
+            <button class="color-code" onclick="insertText('&6')">&6 Gold</button>
+            <button class="color-code" onclick="insertText('&7')">&7 Grau</button>
+            <button class="color-code" onclick="insertText('&8')">&8 Dunkelgrau</button>
+            <button class="color-code" onclick="insertText('&9')">&9 Blau</button>
+            <button class="color-code" onclick="insertText('&a')">&a Grün</button>
+            <button class="color-code" onclick="insertText('&b')">&b Aqua</button>
+            <button class="color-code" onclick="insertText('&c')">&c Rot</button>
+            <button class="color-code" onclick="insertText('&d')">&d Rosa</button>
+            <button class="color-code" onclick="insertText('&e')">&e Gelb</button>
+            <button class="color-code" onclick="insertText('&f')">&f Weiß</button>
+        </div>
+
+        <h3>Text-Effekte</h3>
+        <div id="effects">
+            <button class="effect-code" onclick="insertText('&l')">&l Fett</button>
+            <button class="effect-code" onclick="insertText('&o')">&o Kursiv</button>
+            <button class="effect-code" onclick="insertText('&n')">&n Unterstrichen</button>
+            <button class="effect-code" onclick="insertText('&m')">&m Durchgestrichen</button>
+            <button class="effect-code" onclick="insertText('&r')">&r Reset</button>
+        </div>
+
+        <h3>Chatsymbole</h3>
+        <div id="symbols">
+            <button class="symbol" onclick="insertText('❤')">❤ Herz</button>
+            <button class="symbol" onclick="insertText('★')">★ Stern</button>
+            <button class="symbol" onclick="insertText('✦')">✦ Funkel</button>
+            <button class="symbol" onclick="insertText('✔')">✔ Haken</button>
+            <button class="symbol" onclick="insertText('✖')">✖ Kreuz</button>
+            <button class="symbol" onclick="insertText('→')">→ Pfeil</button>
+            <button class="symbol" onclick="insertText('←')">← Pfeil</button>
+            <button class="symbol" onclick="insertText('↑')">↑ Pfeil</button>
+            <button class="symbol" onclick="insertText('↓')">↓ Pfeil</button>
+            <button class="symbol" onclick="insertText('•')">• Punkt</button>
+        </div>
     </div>
 
-    <!-- Footer mit Links -->
     <footer>
         <h3>Weitere Links</h3>
         <ul>
             <li><a href="#">RGB Generator</a></li>
             <li><a href="#">Nützliche Tools</a></li>
-            <li><a href="#">Sonstiges</a></li>
+            <li><a href="#">Sonstige</a></li>
         </ul>
     </footer>
 
     <script src="script.js"></script>
 </body>
+
 </html>
