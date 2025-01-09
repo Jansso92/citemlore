@@ -3,68 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom ItemLore</title>
+    <title>Custom Item Lore</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h1>Custom ItemLore</h1>
+        <h1>Custom Item Lore</h1>
 
-        <!-- Tooltip Vorschaufenster -->
-        <div id="preview" class="tooltip">
-            <span id="preview-name" class="tooltip-name"></span>
-            <div id="preview-lore" class="tooltip-lore"></div>
+        <!-- Vorschaufenster -->
+        <div class="preview-window">
+            <span id="previewText">Beispiel Text für Item Lore</span>
         </div>
 
-        <!-- Item Name Eingabefeld -->
-        <label for="item-name">Item Name:</label>
-        <input id="item-name" type="text" placeholder="Name hier eingeben">
-
-        <!-- Item Lore Eingabefeld -->
-        <label for="item-lore">Item Lore:</label>
-        <textarea id="item-lore" placeholder="Lore hier eingeben"></textarea>
-
-        <!-- Farbcodes und Formatierungen -->
-        <div class="color-buttons">
-            <h2>Farbcodes</h2>
-            <div id="color-code-buttons"></div>
-            <h2>Formatierungen</h2>
-            <div id="format-buttons"></div>
+        <!-- Item Name -->
+        <div class="input-container">
+            <label for="itemName">Item Name</label>
+            <input type="text" id="itemName" value="Item Name" oninput="updatePreview()">
         </div>
 
-        <!-- Minecraft-Symbole -->
-        <div class="symbols">
-            <h2>Symbole</h2>
-            <div id="symbols">
-                <button onclick="insertSymbol('❤')">❤</button>
-                <button onclick="insertSymbol('★')">★</button>
-                <button onclick="insertSymbol('✔')">✔</button>
+        <!-- Item Lore -->
+        <div class="input-container">
+            <label for="itemLore">Item Lore</label>
+            <textarea id="itemLore" oninput="updatePreview()"></textarea>
+        </div>
+
+        <!-- Farbcodes und Stil Buttons -->
+        <div class="button-container">
+            <div class="color-buttons">
+                <button onclick="insertColor('&6')">Gold</button>
+                <button onclick="insertColor('&5')">Lila</button>
+                <button onclick="insertColor('&4')">Rot</button>
+                <button onclick="insertColor('&9')">Blau</button>
+                <button onclick="insertColor('&a')">Grün</button>
+                <button onclick="insertColor('&b')">Türkis</button>
+                <button onclick="insertColor('&c')">Orange</button>
+                <button onclick="insertColor('&7')">Grau</button>
+            </div>
+            <div class="style-buttons">
+                <button onclick="insertStyle('&l')">Fett</button>
+                <button onclick="insertStyle('&o')">Kursiv</button>
+                <button onclick="insertStyle('&n')">Unterstrichen</button>
+                <button onclick="insertStyle('&m')">Durchgestrichen</button>
+                <button onclick="insertStyle('&r')">Reset</button>
             </div>
         </div>
 
-        <!-- Links -->
+        <!-- Links Section -->
         <footer>
-    <h2>RGB Generator</h2>
-    <ul>
-        <li><a href="https://alonsoaliaga.github.io/generator/" target="_blank">Alonso's RGB Generator</a></li>
-        <li><a href="https://minecraft.menu/minecraft-rgb-generator" target="_blank">Minecraft.menu RGB Generator</a></li>
-        <li><a href="https://www.birdflop.com/resources/rgb/" target="_blank">Birdflop RGB Generator</a></li>
-    </ul>
-    <h2>Tools</h2>
-    <ul>
-        <li><a href="https://www.gamergeeks.net/apps/minecraft/" target="_blank">Minecraft Color Codes</a></li>
-        <li><a href="https://minecraft-heads.com/" target="_blank">Minecraft Heads</a></li>
-        <li><a href="https://mentor.duden.de/" target="_blank">Duden Mentor</a></li>
-    </ul>
-    <h2>Sonstiges</h2>
-    <ul>
-        <li><a href="https://rebane2001.com/mapartcraft/de" target="_blank">MapartCraft</a></li>
-        <li><a href="https://minecraft.fandom.com/de/wiki/Verzauberung" target="_blank">Minecraft Verzauberungen</a></li>
-        <li><a href="https://www.textstudio.com/" target="_blank">Text Studio</a></li>
-    </ul>
-</footer>
+            <div class="footer-container">
+                <div>
+                    <h2>RGB Generator</h2>
+                    <ul>
+                        <li><a href="https://alonsoaliaga.github.io/generator/" target="_blank">Alonso's RGB Generator</a></li>
+                        <li><a href="https://minecraft.menu/minecraft-rgb-generator" target="_blank">Minecraft.menu RGB Generator</a></li>
+                        <li><a href="https://www.birdflop.com/resources/rgb/" target="_blank">Birdflop RGB Generator</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h2>Tools</h2>
+                    <ul>
+                        <li><a href="https://www.gamergeeks.net/apps/minecraft/" target="_blank">Minecraft Color Codes</a></li>
+                        <li><a href="https://minecraft-heads.com/" target="_blank">Minecraft Heads</a></li>
+                        <li><a href="https://mentor.duden.de/" target="_blank">Duden Mentor</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h2>Sonstiges</h2>
+                    <ul>
+                        <li><a href="https://rebane2001.com/mapartcraft/de" target="_blank">MapartCraft</a></li>
+                        <li><a href="https://minecraft.fandom.com/de/wiki/Verzauberung" target="_blank">Minecraft Verzauberungen</a></li>
+                        <li><a href="https://www.textstudio.com/" target="_blank">Text Studio</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
