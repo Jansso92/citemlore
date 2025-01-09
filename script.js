@@ -25,6 +25,32 @@ const colorCodes = [
     { code: '&f', color: '#FFFFFF' }
 ];
 
+// Formatierungen
+const formatCodes = [
+    { code: '&l', label: 'Fett' },
+    { code: '&o', label: 'Kursiv' },
+    { code: '&n', label: 'Unterstrichen' },
+    { code: '&m', label: 'Durchgestrichen' },
+    { code: '&r', label: 'Reset' }
+];
+
+// Buttons für Farbcodes generieren
+colorCodes.forEach(color => {
+    const button = document.createElement('button');
+    button.style.backgroundColor = color.color;
+    button.textContent = color.code;
+    button.addEventListener('click', () => insertCode(color.code));
+    colorButtons.appendChild(button);
+});
+
+// Buttons für Formatierungen generieren
+formatCodes.forEach(format => {
+    const button = document.createElement('button');
+    button.textContent = format.label;
+    button.addEventListener('click', () => insertCode(format.code));
+    formatButtons.appendChild(button);
+});
+
 // Vorschau aktualisieren
 function updatePreview() {
     previewName.innerHTML = formatText(itemNameInput.value, '&6'); // Standardfarbe Gold
@@ -44,6 +70,24 @@ function formatText(text, defaultColor) {
 // Farbe aus Farbcodes holen
 function getColorFromCode(code) {
     return colorCodes.find(c => c.code === code)?.color || '#FFFFFF';
+}
+
+// Code ins Item Lore einfügen
+function insertCode(code) {
+    const cursorPos = itemLoreInput.selectionStart;
+    const textBefore = itemLoreInput.value.substring(0, cursorPos);
+    const textAfter = itemLoreInput.value.substring(cursorPos);
+    itemLoreInput.value = textBefore + code + textAfter;
+    updatePreview();
+}
+
+// Symbol ins Item Lore einfügen
+function insertSymbol(symbol) {
+    const cursorPos = itemLoreInput.selectionStart;
+    const textBefore = itemLoreInput.value.substring(0, cursorPos);
+    const textAfter = itemLoreInput.value.substring(cursorPos);
+    itemLoreInput.value = textBefore + symbol + textAfter;
+    updatePreview();
 }
 
 // Events für Live-Vorschau
