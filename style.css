@@ -1,15 +1,14 @@
 /* Allgemeine Stile */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f6f8fa; /* GitHub-Hintergrundfarbe */
-    color: #24292f; /* Dunkles Grau für Text */
+    background-color: #f6f8fa;
+    color: #24292f;
     margin: 0;
     padding: 0;
 }
 
-/* Header */
 header {
-    background-color: #24292f; /* GitHub-Grau für Header */
+    background-color: #24292f;
     color: white;
     padding: 20px;
     text-align: center;
@@ -25,9 +24,9 @@ header {
 }
 
 .minecraft-tooltip {
-    background-color: #202020; /* Dunkler Hintergrund für den Tooltip */
-    border: 1px solid #333; /* Dünnerer Border für den Tooltip */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Leichtes Schattenspiel */
+    background-color: #202020;
+    border: 1px solid #333;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     padding: 15px;
     color: #a335ee;
     font-size: 14px;
@@ -36,7 +35,7 @@ header {
 }
 
 .tooltip-itemname {
-    color: #d4af37; /* Goldene Farbe für den Itemname */
+    color: #d4af37;
     font-weight: bold;
     margin-bottom: 5px;
 }
@@ -51,10 +50,10 @@ header {
     flex-direction: column;
     margin: 0 auto;
     width: 50%;
-    background-color: white; /* Hintergrund weiß für Eingabebereich */
+    background-color: white;
     border-radius: 8px;
     padding: 15px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Leichter Schlagschatten */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 label {
@@ -62,7 +61,8 @@ label {
     margin-bottom: 5px;
 }
 
-input, textarea {
+input,
+textarea {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
@@ -70,7 +70,7 @@ input, textarea {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 14px;
-    background-color: #f6f8fa; /* Hintergrundfarbe passend zu GitHub */
+    background-color: #f6f8fa;
 }
 
 textarea {
@@ -100,9 +100,54 @@ textarea {
     background-color: #e1e4e8;
 }
 
+/* Farbcodes, Text-Effekte, Symbole */
+button {
+    margin: 5px;
+    padding: 8px 15px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    background-color: #f6f8fa;
+    color: #24292f;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Hover-Effekt für Buttons */
+button:hover {
+    background-color: #e1e4e8;
+}
+
+/* Container für Farbcodes, Text-Effekte und Symbole */
+#colors,
+#effects,
+#symbols {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+button.color-code {
+    width: auto;
+    background-color: #202020;
+    color: white;
+}
+
+button.effect-code {
+    width: auto;
+    background-color: #3f3f3f;
+    color: white;
+}
+
+button.symbol {
+    width: auto;
+    background-color: #505050;
+    color: white;
+}
+
 /* Footer */
 footer {
-    background-color: #24292f; /* GitHub-Grau */
+    background-color: #24292f;
     color: white;
     padding: 20px;
 }
@@ -110,7 +155,7 @@ footer {
 footer h3 {
     margin: 0 0 10px;
     font-size: 18px;
-    color: #d1d5da; /* Hellgrau für Überschriften */
+    color: #d1d5da;
 }
 
 footer ul {
