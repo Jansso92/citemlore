@@ -1,64 +1,52 @@
-// Funktion zum Einfügen von Text an der aktuellen Cursorposition im Textarea
+// Funktion zum Einfügen von Text (Farben, Effekte etc.)
 function insertText(text) {
-    const textarea = document.getElementById('itemlore');
-    const cursorPos = textarea.selectionStart;
-    const textBefore = textarea.value.substring(0, cursorPos);
-    const textAfter = textarea.value.substring(cursorPos);
-    textarea.value = textBefore + text + textAfter;
-    // Cursor nach dem eingefügten Text positionieren
-    textarea.selectionStart = textarea.selectionEnd = cursorPos + text.length;
-    textarea.focus();
+    const loreText = document.getElementById('lore');
+    const caretPos = loreText.selectionStart;
+    const textBefore = loreText.value.substring(0, caretPos);
+    const textAfter = loreText.value.substring(caretPos);
+    loreText.value = textBefore + text + textAfter;
+    loreText.focus();
+    loreText.selectionStart = caretPos + text.length;
+    loreText.selectionEnd = caretPos + text.length;
     updatePreview();
 }
 
-// Funktion zum Aktualisieren der Tooltip-Vorschau
+// Funktion zur Aktualisierung der Tooltip-Vorschau
 function updatePreview() {
-    const loreText = document.getElementById('itemlore').value;
-    // Text mit Farbcodes und Effekten für die Vorschau formatieren
-    const formattedText = formatText(loreText);
-    document.getElementById('tooltip-lore-preview').innerHTML = formattedText;
+    const itemName = document.getElementById('itemname').value;
+    const loreText = document.getElementById('lore').value;
+
+    // Itemname: Zeigt den Text mit den Farbcodes an, aber ohne die Farben
+    document.getElementById('preview-itemname').textContent = itemName;
+
+    // Lore: Zeigt den Text mit den Farbcodes an, aber ohne die Farben
+    document.getElementById('preview-lore').textContent = loreText;
+
+    // Vorschau: Farbcodes werden entfernt, aber die Farben werden angezeigt
+    document.getElementById('preview-itemname').innerHTML = formatTextWithColors(itemName);
+    document.getElementById('preview-lore').innerHTML = formatTextWithColors(loreText);
 }
 
-// Funktion zum Formatieren des Textes (unterstützt Minecraft Farbcodes, Effekte und HTML-Codes)
-function formatText(text) {
-    // HTML entitäten wie &#001122 werden umgesetzt
-    const htmlText = text.replace(/&#\d+;/g, match => {
-        return `<span>${String.fromCharCode(match.match(/\d+/)[0])}</span>`;
-    });
+// Funktion zur Formatierung von Text mit Farbcodes und Effekten
+function formatTextWithColors(text) {
+    let formattedText = text;
 
-    // Farb- und Effekt-Codes
-    const colorCodeMap = {
-        '&0': '<span style="color: #000000">', '&1': '<span style="color: #0000AA">',
-        '&2': '<span style="color: #00AA00">', '&3': '<span style="color: #00AAAA">',
-        '&4': '<span style="color: #AA0000">', '&5': '<span style="color: #AA00AA">',
-        '&6': '<span style="color: #FFAA00">', '&7': '<span style="color: #AAAAAA">',
-        '&8': '<span style="color: #555555">', '&9': '<span style="color: #5555FF">',
-        '&a': '<span style="color: #55FF55">', '&b': '<span style="color: #55FFFF">',
-        '&c': '<span style="color: #FF5555">', '&d': '<span style="color: #FF55FF">',
-        '&e': '<span style="color: #FFFF55">', '&f': '<span style="color: #FFFFFF">',
-        '&l': '<span style="font-weight: bold; font-size: 14px;">', '&o': '<span style="font-style: italic; font-size: 14px;">',
-        '&n': '<span style="text-decoration: underline; font-size: 14px;">', '&m': '<span style="text-decoration: line-through; font-size: 14px;">',
-        '&r': '<span style="font-weight: normal; font-style: normal; text-decoration: none; font-size: 14px;">'
+    // Ersetze Minecraft Farbcodes mit HTML-Äquivalenten
+    const colorCodes = {
+        '&0': 'black', '&1': 'darkblue', '&2': 'darkgreen', '&3': 'darkaqua', '&4': 'darkred', '&5': 'darkviolet',
+        '&6': 'gold', '&7': 'gray', '&8': 'darkgray', '&9': 'blue', '&a': 'green', '&b': 'aqua', '&c': 'red',
+        '&d': 'pink', '&e': 'yellow', '&f': 'white'
     };
 
-    let formattedText = htmlText;
-
-    Object.keys(colorCodeMap).forEach(code => {
+    for (let code in colorCodes) {
         const regex = new RegExp(code, 'g');
-        formattedText = formattedText.replace(regex, colorCodeMap[code] + '$&</span>');
-    });
+        formattedText = formattedText.replace(regex, `<span style="color:${colorCodes[code]}">`);
+    }
+
+    // Ersetze Text-Effekte mit HTML-Tags
+    formattedText = formattedText.replace(/&l/g, '<b>').replace(/&o/g, '<i>')
+                                 .replace(/&n/g, '<u>').replace(/&m/g, '<strike>')
+                                 .replace(/&r/g, '</span>');
 
     return formattedText;
-}
-
-// Funktion zum Kopieren des Textes in die Zwischenablage
-function copyToClipboard() {
-    const loreText = document.getElementById('itemlore').value;
-    const tempTextarea = document.createElement('textarea');
-    tempTextarea.value = loreText;
-    document.body.appendChild(tempTextarea);
-    tempTextarea.select();
-    document.execCommand('copy');
-    document.body.removeChild(tempTextarea);
-    alert("Text in die Zwischenablage kopiert!");
 }
