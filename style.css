@@ -1,101 +1,116 @@
 body {
-    font-family: 'Minecraftia', sans-serif; /* Minecraft-Schrift für die gesamte Seite */
-    background-color: #f6f8fa;
-    color: #24292e;
+    background-color: #2f2f2f; /* Dunkler grauer Hintergrund */
+    color: #ffffff; /* Weißer Text für den Standardtext */
+    font-family: 'Press Start 2P', sans-serif; /* Minecraft Schriftart */
     margin: 0;
-    padding: 20px;
-}
-
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
+    padding: 0;
 }
 
 h1 {
-    color: #0366d6;
+    text-align: center;
+    margin-top: 40px;
 }
 
-.tooltip {
-    background-color: #2d2d2d;
+.container {
+    text-align: center;
+}
+
+.preview-window {
+    width: 80%;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #3e3e3e;
+    border: 1px solid #555;
     color: white;
-    border: 1px solid #444;
-    padding: 10px;
-    margin: 10px 0;
-    font-family: 'Minecraftia', sans-serif;
-    text-align: left;
-    min-height: 100px;
-    white-space: pre-wrap;
+    font-size: 18px;
+    min-height: 60px;
+    font-family: 'Press Start 2P', sans-serif;
 }
 
-.tooltip-name {
-    color: #FFAA00; /* Gold (Standardfarbe für Item Name) */
+.input-container {
+    margin: 20px;
+    text-align: center;
+}
+
+input[type="text"], textarea {
+    font-family: 'Press Start 2P', sans-serif;
     font-size: 16px;
-    display: block;
-    margin-bottom: 5px;
-}
-
-.tooltip-lore {
-    color: #AA00AA; /* Lila (Standardfarbe für Item Lore) */
-    font-size: 12px;
-}
-
-input, textarea {
-    width: 100%;
-    margin: 10px 0;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    width: 300px;
+    padding: 5px;
+    margin-top: 10px;
 }
 
 textarea {
-    resize: vertical;
-    min-height: 100px;
-    font-family: 'Minecraftia', sans-serif; /* Minecraft-Schriftart */
-    font-size: 14px;
+    width: 300px;
+    height: 80px;
 }
 
-.color-buttons, .symbols {
-    margin: 20px 0;
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.color-buttons, .style-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
 }
 
 button {
+    padding: 10px;
+    font-size: 14px;
     margin: 5px;
-    padding: 5px 10px;
     border: none;
-    border-radius: 3px;
     cursor: pointer;
+    background-color: #444;
+    color: #fff;
+    border-radius: 4px;
 }
 
 button:hover {
-    opacity: 0.8;
+    background-color: #666;
 }
 
 footer {
-    margin-top: 30px;
+    background-color: #1a1a1a; /* Dunkler Streifen */
+    color: #ffffff; /* Weißer Text für Überschriften */
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 40px;
+    border-top: 2px solid #333333; /* Zeigt das Ende der Seite an */
 }
 
 footer h2 {
-    margin-bottom: 5px;
-    font-size: 18px;
-    color: #0366d6;
+    font-size: 16px; /* Kleinere Schriftgröße für Überschriften */
+    margin-bottom: 10px;
+    text-transform: uppercase; /* Optional: Überschriften in Großbuchstaben */
 }
 
 footer ul {
     list-style: none;
     padding: 0;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 20px; /* Platz zwischen den Gruppen */
 }
 
 footer ul li {
-    margin: 5px 0;
+    margin: 5px 0; /* Abstand zwischen Links */
 }
 
-footer ul li a {
-    color: #0366d6;
-    text-decoration: none;
+footer a {
+    color: #aaaaaa; /* Helle Textfarbe für Links */
+    font-size: 12px; /* Kleinere Schriftgröße für Links */
+    text-decoration: none; /* Entfernt die Unterstreichung */
 }
 
-footer ul li a:hover {
-    text-decoration: underline;
+footer a:hover {
+    color: #ffffff; /* Links werden weiß, wenn man darüber fährt */
+}
+
+.footer-container {
+    display: flex;
+    justify-content: center; /* Zentriere die Gruppen nebeneinander */
+    flex-wrap: wrap; /* Ermöglicht Umbruch bei kleineren Bildschirmen */
 }
