@@ -1,36 +1,49 @@
-// Update Item Name in Tooltip
-function updateTooltipItemname() {
-    const itemnameInput = document.getElementById('itemname');
-    const tooltipItemname = document.getElementById('tooltip-itemname');
-    tooltipItemname.innerText = itemnameInput.value || 'Item Name';
+// Funktion zur Aktualisierung der Tooltip-Vorschau
+function updatePreview() {
+    var itemname = document.getElementById('itemname').value;
+    var lore = document.getElementById('itemlore').value;
+    
+    document.getElementById('itemname-preview').textContent = itemname;
+    document.getElementById('lore-preview').innerHTML = lore.replace(/\n/g, '<div></div>');
 }
 
-// Update Lore in Tooltip
-function updateTooltipLore() {
-    const loreInput = document.getElementById('lore');
-    const tooltipLore = document.getElementById('tooltip-lore');
+// Event-Listener für das Eingabefeld, um die Vorschau in Echtzeit zu aktualisieren
+document.getElementById('itemname').addEventListener('input', updatePreview);
+document.getElementById('itemlore').addEventListener('input', updatePreview);
 
-    // Clear previous lore and add new lines
-    tooltipLore.innerHTML = '';
-    loreInput.value.split('\n').forEach(line => {
-        const div = document.createElement('div');
-        div.innerText = line;
-        tooltipLore.appendChild(div);
-    });
+// Textformatierungsfunktionen
+function applyBold() {
+    var textarea = document.getElementById('itemlore');
+    textarea.value = "**" + textarea.value + "**"; // Füge "**" hinzu, um fett darzustellen
+    updatePreview();
 }
 
-// Add color codes or formatting to the input
-function addColorCode(code) {
-    const focusedElement = document.activeElement;
-    if (focusedElement && (focusedElement.tagName === 'TEXTAREA' || focusedElement.tagName === 'INPUT')) {
-        const start = focusedElement.selectionStart;
-        const end = focusedElement.selectionEnd;
-        const text = focusedElement.value;
+function applyItalic() {
+    var textarea = document.getElementById('itemlore');
+    textarea.value = "*" + textarea.value + "*"; // Füge "*" hinzu, um kursiv darzustellen
+    updatePreview();
+}
 
-        focusedElement.value = text.slice(0, start) + code + text.slice(end);
-        focusedElement.selectionStart = focusedElement.selectionEnd = start + code.length;
+function applyUnderline() {
+    var textarea = document.getElementById('itemlore');
+    textarea.value = "_" + textarea.value + "_"; // Füge "_" hinzu, um unterstrichen darzustellen
+    updatePreview();
+}
 
-        if (focusedElement.id === 'itemname') updateTooltipItemname();
-        if (focusedElement.id === 'lore') updateTooltipLore();
-    }
+function applyColor() {
+    var textarea = document.getElementById('itemlore');
+    var color = prompt("Gib einen Farbcode ein (Hex oder Farbnamen):", "#ff0000");
+    textarea.value = "<font color='" + color + "'>" + textarea.value + "</font>"; // Setze die Schriftfarbe
+    updatePreview();
+}
+
+// Kopieren der Tooltip-Vorschau
+function copyTooltip() {
+    var tooltip = document.getElementById('tooltip-preview');
+    var range = document.createRange();
+    range.selectNode(tooltip);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    document.execCommand('copy');
+    alert('Tooltip kopiert!');
 }
